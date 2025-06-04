@@ -1,4 +1,3 @@
-// Firebase configuration (replace with your own config)
 const firebaseConfig = {
   apiKey: "AIzaSyCKnOlLJNeMzmALZdCPvwfDY8Yi9H8GGeA",
   authDomain: "crud-6beef.firebaseapp.com",
@@ -9,11 +8,9 @@ const firebaseConfig = {
   measurementId: "G-7KMCJRF9T2"
 };
 
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-// DOM elements
 const personForm = document.getElementById('personForm');
 const nameInput = document.getElementById('name');
 const ageInput = document.getElementById('age');
@@ -26,14 +23,11 @@ const personIdInput = document.getElementById('personId');
 const toggleTableBtn = document.getElementById('toggleTableBtn');
 const dataContainer = document.getElementById('dataContainer');
 
-// Variables
 let editingId = null;
 let isTableVisible = false;
 const peopleRef = db.collection('people');
 
-// Initialize the app
 document.addEventListener('DOMContentLoaded', function() {
-  // Set up event listeners
   toggleTableBtn.addEventListener('click', toggleTable);
   personForm.addEventListener('submit', handleFormSubmit);
   cancelBtn.addEventListener('click', cancelEdit);
@@ -42,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
   dataContainer.style.display = 'none';
 });
 
-// Toggle table visibility
 function toggleTable() {
   isTableVisible = !isTableVisible;
   
@@ -56,7 +49,6 @@ function toggleTable() {
   }
 }
 
-// Render people list from Firestore
 function renderPeople() {
   peopleList.innerHTML = '';
   
@@ -81,7 +73,6 @@ function renderPeople() {
       peopleList.appendChild(row);
     });
 
-    // Add event listeners to buttons
     document.querySelectorAll('.edit-btn').forEach(btn => {
       btn.addEventListener('click', handleEdit);
     });
@@ -94,7 +85,6 @@ function renderPeople() {
   });
 }
 
-// Handle form submission
 async function handleFormSubmit(e) {
   e.preventDefault();
   
